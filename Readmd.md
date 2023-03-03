@@ -21,8 +21,12 @@ dotnet sln add Movies.Contracts/Movies.Contracts.csproj
 - Dapper 
  dotnet add package Dapper --version 2.0.123
 
- -NpgSQL
+ - NpgSQL
  dotnet add package Npgsql --version 7.0.2
+
+ - Fluent Validations
+ 
+ dotnet add package FluentValidation.DependencyInjectionExtensions --version 11.5.1
 
 
 3. Request Json
@@ -34,3 +38,8 @@ dotnet sln add Movies.Contracts/Movies.Contracts.csproj
         "Thriller"
     ]
 }
+
+4. SQL queries
+
+    delete FROM "genres";
+    delete FROM "movies";
