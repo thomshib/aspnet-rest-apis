@@ -28,6 +28,12 @@ dotnet sln add Movies.Contracts/Movies.Contracts.csproj
  
  dotnet add package FluentValidation.DependencyInjectionExtensions --version 11.5.1
 
+2.2 Movies.Api
+
+- Microsoft.AspNetCore.Authentication.JwtBearer
+- dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 7.0.3
+
+
 
 3. Request Json
 

@@ -1,6 +1,55 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
+
+// Add Authentication
+
+builder.Services.AddAuthentication(
+    options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    }
+).AddJwtBearer(
+    tokenOptions =>
+    {
+        tokenOptions.TokenValidationParameters = new TokenValidationParameters
+        {
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]!)),
+            ValidateIssuerSigningKey = true,
+            ValidateLifetime = true,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidIssuer = config["Jwt:Issuer"],
+            ValidAudience = config["Jwt:Audience"]
+
+        };
+    }
+);
+
+builder.Services.AddAuthorization(
+    options =>
+    {
+        //only "admin" claim policy
+        options.AddPolicy(AuthConstants.AdminUserPolicyName,
+            p => p.RequireClaim(AuthConstants.AdminUserClaimName, "true"));
+
+        //either and "admin" or "trusted_member" policy
+        options.AddPolicy(AuthConstants.TrusterMemberPolicyName,
+           p => p.RequireAssertion(c =>
+            c.User.HasClaim( m => m is { Type:AuthConstants.AdminUserClaimName, Value: "true"}) ||
+            c.User.HasClaim( m => m is { Type:AuthConstants.TrusterMemberClaimName, Value: "true"})
+
+
+
+             ));
+    }
+);
 
 
 // Add services to the container.
@@ -25,6 +74,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 
