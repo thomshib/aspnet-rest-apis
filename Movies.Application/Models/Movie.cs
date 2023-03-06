@@ -11,6 +11,10 @@ public partial class Movie{
 
     public  string Slug  => GenerateSlug();
 
+    public float? Rating {get;set;}
+
+    public int? UserRating{get;set;}
+
     private  string GenerateSlug()
     {
         // var sluggedTitle = Regex.Replace(Title,"[^0-9A-Za-z _-]", string.Empty)

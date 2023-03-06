@@ -11,4 +11,8 @@ public class MovieResponse
 
     public  string Slug { get; init; }
 
+    public int? UserRating {get; init;}
+
+    public float? Rating {get; init;}
+
 }

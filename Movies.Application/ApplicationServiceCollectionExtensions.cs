@@ -6,8 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 public static class ApplicationServiceCollectionExtensions{
 
     public static IServiceCollection  AddApplication( this IServiceCollection services){
+        services.AddSingleton<IRatingRepository, RatingRepository>();
         services.AddSingleton<IMovieRepository, MovieRepository>();
         services.AddSingleton<IMovieService, MovieService>();
+            services.AddSingleton<IRatingService, RatingService>();
         services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
         return services;
         
