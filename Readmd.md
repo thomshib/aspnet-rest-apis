@@ -31,9 +31,15 @@ dotnet sln add Movies.Contracts/Movies.Contracts.csproj
 2.2 Movies.Api
 
 - Microsoft.AspNetCore.Authentication.JwtBearer
-- dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 7.0.3
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 7.0.3
 
+- Versoning package
+dotnet add package Asp.Versioning.Mvc 
 
+- Swagger
+dotnet add package Swashbuckle.AspNetCore.Swagger
+
+dotnet add package Asp.Versioning.Mvc.ApiExplorer
 
 3. Request Json
 
