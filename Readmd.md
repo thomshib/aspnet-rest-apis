@@ -55,3 +55,13 @@ dotnet add package Asp.Versioning.Mvc.ApiExplorer
 
     delete FROM "genres";
     delete FROM "movies";
+
+5. Setting up PostgreSQL using Docker
+
+    Navigate to the Movies.Application directory:
+    `Movies.Application/docker-compose.yml`
+
+    Run the following command to start the PostgreSQL container
+    `docker-compose up -d`
+
+6. dotnet run --project Movies.Api
